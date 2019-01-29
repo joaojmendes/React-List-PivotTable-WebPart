@@ -1,7 +1,7 @@
 declare interface IListPivotTableWebPartStrings {
   PropertyPaneDescription: string;
   BasicGroupName: string;
-  DescriptionFieldLabel: string;
+  TitleFieldLabel: string;
 }
 
 declare module 'ListPivotTableWebPartStrings' {

@@ -10,18 +10,28 @@ import {
 import * as strings from 'ListPivotTableWebPartStrings';
 import ListPivotTable from './components/ListPivotTable';
 import { IListPivotTableProps } from './components/IListPivotTableProps';
+import { PropertyFieldListPicker, PropertyFieldListPickerOrderBy } from '@pnp/spfx-property-controls/lib/PropertyFieldListPicker';
+import { DisplayMode } from '@microsoft/sp-core-library';
+
 
 export interface IListPivotTableWebPartProps {
-  description: string;
+  title: string;
+  lists: string | string[]; // Stores the list ID(s)
+
 }
 
 export default class ListPivotTableWebPart extends BaseClientSideWebPart<IListPivotTableWebPartProps> {
 
   public render(): void {
-    const element: React.ReactElement<IListPivotTableProps > = React.createElement(
+    const element: React.ReactElement<IListPivotTableProps> = React.createElement(
       ListPivotTable,
       {
-        description: this.properties.description
+        title: this.properties.title,
+        displayMode: this.displayMode,
+        listId:this.properties.lists,
+        updateProperty: (value: string) => {
+        this.properties.title = value;
+        }
       }
     );
 
@@ -36,6 +46,10 @@ export default class ListPivotTableWebPart extends BaseClientSideWebPart<IListPi
     return Version.parse('1.0');
   }
 
+  public onPropertyPaneFieldChanged() {
+
+  }
+
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
     return {
       pages: [
@@ -47,8 +61,22 @@ export default class ListPivotTableWebPart extends BaseClientSideWebPart<IListPi
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
+                PropertyPaneTextField('title', {
+                  label: strings.TitleFieldLabel
+                }),
+                PropertyFieldListPicker('lists', {
+                  label: 'Select a list',
+                  selectedList: this.properties.lists,
+                  includeHidden: false,
+                  orderBy: PropertyFieldListPickerOrderBy.Title,
+                  disabled: false,
+                  onPropertyChange: this.onPropertyPaneFieldChanged.bind(this),
+                  properties: this.properties,
+                  context: this.context,
+                  onGetErrorMessage: null,
+                  deferredValidationTime: 0,
+                  key: 'listPickerFieldId',
+                  multiSelect: false
                 })
               ]
             }

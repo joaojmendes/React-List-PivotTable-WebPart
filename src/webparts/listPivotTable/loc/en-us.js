@@ -1,7 +1,7 @@
 define([], function() {
   return {
-    "PropertyPaneDescription": "Description",
-    "BasicGroupName": "Group Name",
-    "DescriptionFieldLabel": "Description Field"
+    "PropertyPaneDescription": "List Pivot Table - WebPart",
+    "BasicGroupName": "Pivot Table Properties",
+    "TitleFieldLabel": "Title"
   }
 });

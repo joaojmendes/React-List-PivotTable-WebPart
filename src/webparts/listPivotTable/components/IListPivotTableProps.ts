@@ -1,3 +1,8 @@
+import { DisplayMode } from '@microsoft/sp-core-library';
+
 export interface IListPivotTableProps {
-  description: string;
+  title: string;
+  listId: string;
+  displayMode: DisplayMode;
+  updateProperty: (value: string) => void;
 }
