@@ -1,0 +1,13 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "react-spfx-list-pivottable-control-client-side-solution",
+    "id": "69a673ee-81e0-427d-9b0b-a40cb74eb25d",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true
+  },
+  "paths": {
+    "zippedPackage": "solution/react-spfx-list-pivottable-control.sppkg"
+  }
+}

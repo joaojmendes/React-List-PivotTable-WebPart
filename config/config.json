@@ -1,0 +1,20 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "list-pivot-table-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/listPivotTable/ListPivotTableWebPart.js",
+          "manifest": "./src/webparts/listPivotTable/ListPivotTableWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "ListPivotTableWebPartStrings": "lib/webparts/listPivotTable/loc/{locale}.js",
+    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js",
+    "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js"
+  }
+}
