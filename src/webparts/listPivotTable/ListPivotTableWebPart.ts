@@ -4,7 +4,11 @@ import { Version } from '@microsoft/sp-core-library';
 import {
   BaseClientSideWebPart,
   IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  PropertyPaneTextField,
+  PropertyPaneDropdown,
+  IPropertyPaneDropdownProps,
+  IPropertyPaneDropdownOption,
+
 } from '@microsoft/sp-webpart-base';
 
 import * as strings from 'ListPivotTableWebPartStrings';
@@ -14,10 +18,11 @@ import { PropertyFieldListPicker, PropertyFieldListPickerOrderBy } from '@pnp/sp
 import { DisplayMode } from '@microsoft/sp-core-library';
 
 
+
 export interface IListPivotTableWebPartProps {
   title: string;
-  lists: string | string[]; // Stores the list ID(s)
-
+  lists: string;
+  view: string | number;
 }
 
 export default class ListPivotTableWebPart extends BaseClientSideWebPart<IListPivotTableWebPartProps> {
@@ -28,10 +33,11 @@ export default class ListPivotTableWebPart extends BaseClientSideWebPart<IListPi
       {
         title: this.properties.title,
         displayMode: this.displayMode,
-        listId:this.properties.lists,
+        listId: this.properties.lists,
         updateProperty: (value: string) => {
-        this.properties.title = value;
-        }
+          this.properties.title = value;
+        },
+        context: this.context
       }
     );
 
@@ -45,9 +51,13 @@ export default class ListPivotTableWebPart extends BaseClientSideWebPart<IListPi
   protected get dataVersion(): Version {
     return Version.parse('1.0');
   }
-
-  public onPropertyPaneFieldChanged() {
-
+  // Property Change
+  public async onPropertyPaneFieldChanged(propertyPath: string, oldValue: any, newValue: any) {
+    return;
+  }
+  // Panel Conf. Start
+  protected async onPropertyPaneConfigurationStart(): Promise<void> {
+    return;
   }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
@@ -76,7 +86,8 @@ export default class ListPivotTableWebPart extends BaseClientSideWebPart<IListPi
                   onGetErrorMessage: null,
                   deferredValidationTime: 0,
                   key: 'listPickerFieldId',
-                  multiSelect: false
+                  multiSelect: false,
+                  baseTemplate: 100,
                 })
               ]
             }
