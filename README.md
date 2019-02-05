@@ -10,6 +10,7 @@ All the configuration of analises is save in WebPart Page properties.
 
 
 ![List PivotTable](./assets/Screenshot01.png)
+![List PivotTable](./assets/Screenshot02.png)
 
 
 ## Used SharePoint Framework Version 
