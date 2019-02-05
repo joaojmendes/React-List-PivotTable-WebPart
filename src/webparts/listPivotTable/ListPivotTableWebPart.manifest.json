@@ -20,7 +20,9 @@
     "description": { "default": "ListPivotTable description" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "ListPivotTable"
+      "title": "ListPivotTable",
+      "listd": "",
+      "pivotData": {}
     }
   }]
 }

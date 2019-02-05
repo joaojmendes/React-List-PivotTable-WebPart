@@ -29,11 +29,14 @@
     "@types/react-dom": "16.0.5",
     "@types/webpack-env": "1.13.1",
     "jquery": "^3.3.1",
+    "pivottable": "^2.23.0",
     "plotly.js": "^1.44.1",
+    "prop-types": "^15.6.2",
     "react": "16.3.2",
     "react-dom": "16.3.2",
     "react-pivottable": "^0.9.0",
-    "react-plotly.js": "^2.2.0"
+    "react-plotly.js": "^2.2.0",
+    "webdatarocks": "^1.0.2"
   },
   "resolutions": {
     "@types/react": "16.4.2"
