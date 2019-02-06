@@ -17,14 +17,10 @@ export default class SPService {
 
 
   constructor(private _context: WebPartContext | ApplicationCustomizerContext) {
-    const _position: number = this._context.pageContext.site.serverRequestPath.lastIndexOf('/');
 
-    this.currentPageName = this._context.pageContext.site.serverRequestPath.substring(_position + 1);
-    console.log(this.currentPageName);
-    console.log("InstID:" + this._context.instanceId);
   }
 
-// Get PivotData from page properties
+  // Get PivotData from page properties
   public async getSaveData() {
     const apiUrl = `${this._context.pageContext.web.absoluteUrl}/_api/sitepages/pages(${this._context.pageContext.listItem.id})`;
     let returnProperties: any = null;
@@ -33,8 +29,8 @@ export default class SPService {
     if (_data.ok) {
       const results = await _data.json();
       console.log(results);
-     // if (results && results.value && results.value.length > 0) {
-      if (results ){
+      // if (results && results.value && results.value.length > 0) {
+      if (results) {
         const canvasContent = JSON.parse(results.CanvasContent1);
         for (const v of canvasContent) {
           if (v.id === this._context.instanceId) {
@@ -52,11 +48,11 @@ export default class SPService {
 
   public async setSaveData(data: any) {
 
-    let i:number  = 0;
+    let i: number = 0;
     // Is currentPage loaded ? if not return
-    if (!this.currentPage) return ;
+    if (!this.currentPage) return;
     // Save Current CanvasContent
-    let canvasContent1Updated :any = JSON.parse(this.currentPage.CanvasContent1);
+    let canvasContent1Updated: any = JSON.parse(this.currentPage.CanvasContent1);
     // Read CanvasContent object
     const canvasContent1 = JSON.parse(this.currentPage.CanvasContent1);
     for (const v of canvasContent1) {
@@ -64,7 +60,7 @@ export default class SPService {
       if (v.id === this._context.instanceId) {
         // Update Property pivotData
         v.webPartData.properties.pivotData = data;
-        console.log(v.webPartData.properties);
+        console.log("update " + JSON.stringify(v.webPartData.properties));
         // Update local copy of CanvasContent1
         canvasContent1Updated[i] = v;
         break;
@@ -74,19 +70,24 @@ export default class SPService {
     // Update CanvasContent of current Page width new data
     this.currentPage.CanvasContent1 = JSON.stringify(canvasContent1Updated);
     //console.log(JSON.stringify("after" + this.currentPage.CanvasContent1));
-
+    console.log("novo1:" + JSON.stringify(canvasContent1Updated));
+    console.log("novo2:" + JSON.stringify(this.currentPage.CanvasContent1));
     const spOpts: ISPHttpClientOptions = {
       body: `{ "__metadata":{"type":"SP.Publishing.SitePage"},"CanvasContent1":${JSON.stringify(this.currentPage.CanvasContent1)}}`
     };
     // Checkout Page before save
     let apiUrl = `${this._context.pageContext.web.absoluteUrl}/_api/sitepages/pages(${this._context.pageContext.listItem.id})/checkoutpage`;
-    const pageCheckOut = await this._context.spHttpClient.post(apiUrl, SPHttpClient.configurations.v1,{});
+    const pageCheckOut = await this._context.spHttpClient.post(apiUrl, SPHttpClient.configurations.v1, {});
     // Save Page with new data
-    apiUrl = `${this._context.pageContext.web.absoluteUrl}/_api/sitepages/pages(${this.currentPage.Id})/savepage`;
-    const _data = await this._context.spHttpClient.post(apiUrl, SPHttpClient.configurations.v1, spOpts);
-    if (_data.ok) {
-      console.log("Page Updated with new properties.");
-    }
+
+      apiUrl = `${this._context.pageContext.web.absoluteUrl}/_api/sitepages/pages(${this.currentPage.Id})/savepage`;
+      const _data = await this._context.spHttpClient.post(apiUrl, SPHttpClient.configurations.v1, spOpts);
+      if (_data.ok) {
+        console.log("Page Updated with new properties.");
+      } else {
+        console.log(_data.statusText + _data.status);
+      }
+
     return;
   }
   /**

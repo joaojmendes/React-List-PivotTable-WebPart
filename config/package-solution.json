@@ -8,6 +8,6 @@
     "skipFeatureDeployment": true
   },
   "paths": {
-    "zippedPackage": "solution/react-spfx-list-pivottable-control.sppkg"
+    "zippedPackage": "solution/react-spfx-list-pivottable-webpart.sppkg"
   }
 }

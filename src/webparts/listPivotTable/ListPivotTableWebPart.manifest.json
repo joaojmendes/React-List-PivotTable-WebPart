@@ -16,12 +16,12 @@
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
     "group": { "default": "Other" },
-    "title": { "default": "ListPivotTable" },
-    "description": { "default": "ListPivotTable description" },
-    "officeFabricIconFontName": "Page",
+    "title": { "default": "List PivotTable" },
+    "description": { "default": "List PivotTable" },
+    "officeFabricIconFontName": "PivotChart",
     "properties": {
-      "title": "ListPivotTable",
-      "listd": "",
+      "title": "List PivotTable",
+      "lists": "",
       "pivotData": {}
     }
   }]

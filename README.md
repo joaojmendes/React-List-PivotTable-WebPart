@@ -1,16 +1,15 @@
 # React List PivotTable Web Part
 
 ## Summary
-This WebPart is a implementation of react-pivottable in SharePoint 
 
+This WebPart allows you to do various types of data analysis, including charts. The WebPart uses a component based on pivottable.js
 
-This permit data analises based on SharePoint List Data, including Charts.
+The configuration data of the Pivot Table is saved with the WebPart properties, the entire process of updating this data is done in real time when a change occurs in the Pivot Table.  
 
-All the configuration of analises is save in WebPart Page properties.
-
-
-![List PivotTable](./assets/Screenshot01.png)
-![List PivotTable](./assets/Screenshot02.png)
+![List PivotTable Screenshot 1](./assets/Screenshot01.png)
+![List PivotTable Screenshot 2](./assets/Screenshot02.png)
+![List PivotTable Screenshot 3](./assets/Screenshot03.png)
+![List PivotTable Screenshot 4](./assets/Screenshot04.png)
 
 
 ## Used SharePoint Framework Version 

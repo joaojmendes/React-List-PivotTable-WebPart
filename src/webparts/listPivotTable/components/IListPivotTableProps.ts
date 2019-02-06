@@ -8,4 +8,5 @@ export interface IListPivotTableProps {
   updateProperty: (value: string) => void;
   context: WebPartContext;
   properties: IListPivotTableWebPartProps;
+  listId:string;
 }
