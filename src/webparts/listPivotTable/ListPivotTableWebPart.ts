@@ -32,13 +32,11 @@ export default class ListPivotTableWebPart extends BaseClientSideWebPart<IListPi
   private spService: SPService;
   public constructor(props) {
     super();
-    //this.updatePivotData = this.updatePivotData.bind(this);
     this.spService = new SPService(this.context);
   }
 
   @override
   public OnInit(): Promise<void> {
-    // Get PivotData is it exists
     return;
   }
 

@@ -23,7 +23,6 @@ import * as strings from 'ListPivotTableWebPartStrings';
 
 
 const PlotlyRenderers = createPlotlyRenderers(Plot);
-//const data = [{"Title":"Leitao","Equipamento":"Montra","HoraInicoExp":"09:53","OData__x0032_hora":"16:00H","OData__x0032_horaTemp":12.0,"OData__x0032_horaconforme":false},{"Title":"Lazanha","Equipamento":"Vitrine","HoraInicoExp":"10:16","OData__x0032_hora":"16:00H","OData__x0032_horaTemp":57.0,"OData__x0032_horaconforme":true},{"Title":"Frango","Equipamento":"Montra","HoraInicoExp":"10:45","OData__x0032_hora":"16:00H","OData__x0032_horaTemp":54.0,"OData__x0032_horaconforme":true},{"Title":"Bolos","Equipamento":"Vitrine","HoraInicoExp":"10:5","OData__x0032_hora":"16:00H","OData__x0032_horaTemp":24.0,"OData__x0032_horaconforme":false},{"Title":"Bolos de Anivers\u00e1rio","Equipamento":"Vitrine","HoraInicoExp":"09:52","OData__x0032_hora":"14:00h","OData__x0032_horaTemp":null,"OData__x0032_horaconforme":false},{"Title":"teste","Equipamento":"Frango","HoraInicoExp":"0:10","OData__x0032_hora":"13:00H","OData__x0032_horaTemp":61.0,"OData__x0032_horaconforme":false},{"Title":"Cafe","Equipamento":"montra","HoraInicoExp":"1015","OData__x0032_hora":null,"OData__x0032_horaTemp":null,"OData__x0032_horaconforme":false},{"Title":"Pastelaria","Equipamento":"Vitrine","HoraInicoExp":"1026","OData__x0032_hora":null,"OData__x0032_horaTemp":null,"OData__x0032_horaconforme":false}];
 
 export default class ListPivotTable extends React.Component<IListPivotTableProps, IListPivotTableState> {
   private spService: SPService;
@@ -36,25 +35,16 @@ export default class ListPivotTable extends React.Component<IListPivotTableProps
     this.spService = new SPService(this.props.context);
     this.pivotData = { cols: [], rows: [], vals: [], aggregatorName: 'Count', rendererName: 'Table' };
     this.state = { pivotState: { data: [] }, isLoading: true, cols: [], rows: [], vals: [], aggregatorName: 'Count', rendererName: 'Table' };
-
   }
 
   // Componente Did Mount
   public async componentDidMount() {
     // Get List Items
     this.dataItems = await this.spService.getListItems(this.props.listId);
-
+    // Get PivotData from WebPart Property pivotData
     const pageProperties: any = await this.spService.getSaveData();
     if (pageProperties && pageProperties.pivotData) {
-      //this.props.properties.pivotData = pageProperties.pivotData;
-      console.log("PivotTable Get Data" + JSON.stringify(pageProperties.pivotData));
-
       this.pivotData = pageProperties.pivotData;
-      /* this.pivotData.cols = this.props.properties.pivotData.cols;
-        this.pivotData.rows = this.props.properties.pivotData.rows;
-        this.pivotData.vals = this.props.properties.pivotData.vals;
-        this.pivotData.rendererName = this.props.properties.pivotData.rendererName;
-        this.pivotData.aggregatorName = this.props.properties.pivotData.aggregatorName;*/
     }
     // }
     this.setState({
@@ -71,18 +61,9 @@ export default class ListPivotTable extends React.Component<IListPivotTableProps
   public async componentDidUpdate(prevProps: IListPivotTableProps) {
 
     if (prevProps.listId !== this.props.listId) {
-
+      // Get List Data
       this.dataItems = await this.spService.getListItems(this.props.listId);
-
-      const pivotData: IPivotData = {
-        cols: [],
-        rows: [],
-        vals: [],
-        aggregatorName: 'Count',
-        rendererName: 'Table'
-      };
-      console.log("save data:" + JSON.stringify(pivotData));
-
+      // Update State
       this.setState({
         pivotState: { data: this.dataItems },
         cols: [],

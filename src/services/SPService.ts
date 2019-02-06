@@ -17,9 +17,7 @@ export default class SPService {
 
 
   constructor(private _context: WebPartContext | ApplicationCustomizerContext) {
-
   }
-
   // Get PivotData from page properties
   public async getSaveData() {
     const apiUrl = `${this._context.pageContext.web.absoluteUrl}/_api/sitepages/pages(${this._context.pageContext.listItem.id})`;
@@ -28,8 +26,7 @@ export default class SPService {
     const _data = await this._context.spHttpClient.get(apiUrl, SPHttpClient.configurations.v1);
     if (_data.ok) {
       const results = await _data.json();
-      console.log(results);
-      // if (results && results.value && results.value.length > 0) {
+
       if (results) {
         const canvasContent = JSON.parse(results.CanvasContent1);
         for (const v of canvasContent) {
@@ -69,9 +66,7 @@ export default class SPService {
     }
     // Update CanvasContent of current Page width new data
     this.currentPage.CanvasContent1 = JSON.stringify(canvasContent1Updated);
-    //console.log(JSON.stringify("after" + this.currentPage.CanvasContent1));
-    console.log("novo1:" + JSON.stringify(canvasContent1Updated));
-    console.log("novo2:" + JSON.stringify(this.currentPage.CanvasContent1));
+
     const spOpts: ISPHttpClientOptions = {
       body: `{ "__metadata":{"type":"SP.Publishing.SitePage"},"CanvasContent1":${JSON.stringify(this.currentPage.CanvasContent1)}}`
     };
@@ -79,7 +74,6 @@ export default class SPService {
     let apiUrl = `${this._context.pageContext.web.absoluteUrl}/_api/sitepages/pages(${this._context.pageContext.listItem.id})/checkoutpage`;
     const pageCheckOut = await this._context.spHttpClient.post(apiUrl, SPHttpClient.configurations.v1, {});
     // Save Page with new data
-
       apiUrl = `${this._context.pageContext.web.absoluteUrl}/_api/sitepages/pages(${this.currentPage.Id})/savepage`;
       const _data = await this._context.spHttpClient.post(apiUrl, SPHttpClient.configurations.v1, spOpts);
       if (_data.ok) {
