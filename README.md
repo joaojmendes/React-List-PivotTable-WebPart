@@ -6,6 +6,7 @@ This WebPart allows you to do various types of data analysis, including charts. 
 
 The configuration data of the Pivot Table is saved with the WebPart properties, the entire process of updating this data is done in real time when a change occurs in the Pivot Table.  
 
+![List PivotTable Screenshot 0](./assets/Screenshot05.png)
 ![List PivotTable Screenshot 1](./assets/Screenshot01.png)
 ![List PivotTable Screenshot 2](./assets/Screenshot02.png)
 ![List PivotTable Screenshot 3](./assets/Screenshot03.png)
